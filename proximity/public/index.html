@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0d14" />
+  <title>NearMatch</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+<!-- ── Auth Screen ─────────────────────────────────────────────────────────── -->
+<div id="auth-screen">
+  <div class="logo">NearMatch</div>
+  <p class="tagline">Meet people within 150 metres</p>
+
+  <div class="auth-box">
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Sign In</button>
+      <button class="auth-tab" data-tab="register">Sign Up</button>
+    </div>
+
+    <!-- Login -->
+    <form id="login-form">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+
+    <!-- Register -->
+    <form id="register-form" style="display:none">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="reg-name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="reg-username" placeholder="@username" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="••••••••" required />
+      </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" id="reg-age" placeholder="25" min="18" max="99" required />
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="reg-gender">
+          <option value="">Prefer not to say</option>
+          <option value="man">Man</option>
+          <option value="woman">Woman</option>
+          <option value="nonbinary">Non-binary</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Looking for</label>
+        <select id="reg-looking">
+          <option value="everyone">Everyone</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Bio</label>
+        <textarea id="reg-bio" placeholder="A few words about you…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── App Shell ───────────────────────────────────────────────────────────── -->
+<div id="app">
+  <header class="top-bar">
+    <span class="logo">NearMatch</span>
+    <div class="top-bar-right">
+      <button id="toggle-visible" class="on">Visible</button>
+      <button id="logout-btn">Sign out</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Radar screen -->
+    <div id="radar-screen" class="screen active">
+      <div id="radar-wrap">
+        <div class="radar" id="radar">
+          <div class="radar-ring"></div>
+          <div class="radar-ring"></div>
+          <div class="radar-ring"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-self"></div>
+        </div>
+        <p id="radar-status">Locating you…</p>
+      </div>
+    </div>
+
+    <!-- Nearby list screen -->
+    <div id="nearby-screen" class="screen">
+      <div id="nearby-list"></div>
+    </div>
+
+    <!-- Matches screen -->
+    <div id="matches-screen" class="screen">
+      <div id="matches-list"></div>
+    </div>
+
+    <!-- Chat screen -->
+    <div id="chat-screen" class="screen">
+      <div class="chat-header">
+        <button class="chat-back" id="chat-back">&#8592;</button>
+        <div class="avatar" id="chat-avatar">👤</div>
+        <span class="chat-partner-name" id="chat-partner-name"></span>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Message…" maxlength="500" />
+        <button class="send-btn" id="send-btn">&#10148;</button>
+      </div>
+    </div>
+
+    <!-- Profile screen -->
+    <div id="profile-screen" class="screen">
+      <h2>My Profile</h2>
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar-big" id="profile-avatar">👤</div>
+      </div>
+      <form id="profile-form">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="prof-name" />
+        </div>
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" id="prof-age" min="18" max="99" />
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="prof-gender">
+            <option value="">Prefer not to say</option>
+            <option value="man">Man</option>
+            <option value="woman">Woman</option>
+            <option value="nonbinary">Non-binary</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Looking for</label>
+          <select id="prof-looking">
+            <option value="everyone">Everyone</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Bio</label>
+          <textarea id="prof-bio"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="radar-screen">
+      <span class="icon">📡</span>Radar
+    </button>
+    <button class="nav-btn" data-screen="nearby-screen">
+      <span class="icon">👥</span>Nearby
+      <span class="badge" id="nearby-badge"></span>
+    </button>
+    <button class="nav-btn" data-screen="matches-screen">
+      <span class="icon">💜</span>Matches
+      <span class="badge" id="matches-badge"></span>
+    </button>
+    <button class="nav-btn" data-screen="profile-screen">
+      <span class="icon">👤</span>Profile
+    </button>
+  </nav>
+</div>
+
+<!-- Match flash overlay -->
+<div class="match-flash" id="match-flash">
+  <div class="match-flash-title">It's a Match! 💜</div>
+  <p>You both liked each other</p>
+  <button class="btn btn-primary" id="match-flash-chat" style="width:200px">Send Message</button>
+  <button class="btn btn-secondary" id="match-flash-close" style="width:200px;margin-top:8px">Keep Exploring</button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
