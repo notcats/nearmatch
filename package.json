@@ -1,0 +1,15 @@
+{
+  "name": "nearmatch",
+  "version": "0.1.0",
+  "description": "Deduplicate echoes and count independent sources per event for crisis monitoring.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "nearmatch": "src/cli.js"
+  },
+  "scripts": {
+    "demo": "node test/demo.js",
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
